@@ -1,3 +1,4 @@
-export * from './fs-body.module';
+export * from './directives';
+export * from './fs-calendar.module';
 export * from './services';
 

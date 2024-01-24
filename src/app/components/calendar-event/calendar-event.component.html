@@ -1,0 +1,7 @@
+<ng-container *ngIf="eventTemplate; else default">
+  <ng-container [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{ event: eventContentArg }"></ng-container>
+</ng-container>
+
+<ng-template #default>
+  {{eventContentArg.timeText}}
+</ng-template>

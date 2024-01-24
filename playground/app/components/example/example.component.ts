@@ -1,31 +1,54 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { HtmlClassRenderer, HtmlRenderer } from '@firestitch/body';
+import { CalendarConfig } from '@firestitch/calendar';
+import { ItemType } from '@firestitch/filter';
+
+import { of } from 'rxjs';
+
+import { EventSourceFuncArg } from '@fullcalendar/core';
+import { addHours } from 'date-fns';
 
 
 @Component({
-  selector: 'example',
+  selector: 'app-example',
   templateUrl: './example.component.html',
+  styleUrls: ['./example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExampleComponent {
+export class ExampleComponent implements OnInit {
 
-  public htmlClass = false;
+  public config: CalendarConfig;
 
-  constructor(
-    private _htmlClassRenderer: HtmlClassRenderer,
-    private _htmlRenderer: HtmlRenderer,
-  ) {
-    this._htmlRenderer.addStyle('body { background: #0027ff33; }', { id: 'styles' });
+  public ngOnInit(): void {
+    this.config = {
+      eventsFetch: (data: EventSourceFuncArg) => {
+        const events = [
+          {
+            start: new Date(),
+            end: addHours(new Date(), 5),
+          },
+        ];
+
+        return of(events);
+      },
+      filterConfig: {
+        items: [
+          {
+            type: ItemType.Text,
+            label: 'Search',
+            name: 'search',
+          },
+        ],
+      },
+      toolbarMenuItems: [
+        {
+          label: 'Do Something',
+          click: () => {
+            //
+          },
+        },
+      ],
+    };
   }
 
-  public toogleHtmlClass(): void {
-    if(this.htmlClass) {
-      this._htmlClassRenderer.removeClass('some-class');
-    } else {
-      this._htmlClassRenderer.addClass('some-class');
-    }
-
-    this.htmlClass = !this.htmlClass;
-  }
 }

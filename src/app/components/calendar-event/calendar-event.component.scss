@@ -1,0 +1,62 @@
+// @import 'styles/variables';
+
+// .container {
+//   height: 100%;
+
+//   .title {
+//     margin: 3px 0;
+//   }
+
+//   .event-route-icon {
+//     float: right;
+//     margin: 0;
+//     transform: scale(.85);
+//   }
+
+//   .event-objects {
+
+//     .event-object img {
+//       border: 2px solid transparent;
+//     }
+
+//     .event-object + .event-object {
+//       margin-left: -7px;
+//     }
+
+//     .event-object + .event-object img {
+//       border-color: $brand-primary-color-light;
+//     }
+
+//     img {
+//       border-radius: 50%;
+//       height: 25px;
+//     }
+
+//     .event-object {
+//       position: relative;
+//     }
+//   }
+
+//   .location-holder {
+//     position: relative;
+//     padding-right: 10px;
+//   }
+
+//   &.other-group {
+//     .event-objects .event-object + .event-object img {
+//       border-color: $brand-secondary-color;
+//     }
+//   }
+// }
+
+// .row {
+//   display: flex;
+//   white-space: nowrap;
+//   align-items: center;
+//   overflow: hidden;
+
+//   .row-icon {
+//     margin-right: 3px;
+//     transform: scale(0.85);
+//   }
+// }

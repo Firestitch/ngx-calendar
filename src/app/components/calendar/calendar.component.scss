@@ -1,0 +1,157 @@
+@import '~@firestitch/style/variables';
+
+:host {
+ display: flex;
+ flex-direction: column;
+ height: 100%;
+}
+
+.fc ::ng-deep {
+  .fc-col-header-cell {
+      border-right: none;
+      border-left: none;
+
+      .name {
+        color: #979797;
+        text-transform: uppercase;
+        font-size: 80%;
+      }
+
+      .number {
+        font-size: 140%;
+        color: #454545;
+        margin: 4px 0;
+      }
+  }
+
+  .fc-scrollgrid,
+  .fc-timegrid-axis,
+  .fc-scrollgrid-section > *,
+  .fc-timegrid-slot-label {
+    border: none;
+  }
+    
+  table {
+    border-bottom-style: unset;
+    border-left-style: unset;
+    
+    tbody {
+      tr td:last-child {
+        border-right: 1px solid var(--fc-border-color);
+      }
+    }
+  }
+
+  .fc-timegrid-slots {
+    table {
+      tbody {
+        tr:last-child td:not(.fc-timegrid-slot-label) {
+          border-bottom: 1px solid var(--fc-border-color);        
+        }
+      }
+    }    
+  }
+}
+
+fs-filter {
+  margin: 0;
+}
+
+
+.calendar {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;  
+
+  .left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .prev-next {
+      margin: 0 8px;
+    }
+  }
+
+  .title {
+    font-size: 125%;
+    font-weight: bold;
+  }
+
+  .right {
+    justify-content: flex-end;
+    display: inline-flex;
+    align-items: center;
+    flex-grow: 1;
+
+    .calendar-view {
+      width: auto;
+  
+      ::ng-deep {
+        .mat-select-value {
+          max-width: 100%;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+
+  .center {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+
+    .title {
+      font-size: 110%;
+      padding: 0 10px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    a {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .toolbar {
+    margin-top: 10px;
+    .center {
+      justify-content: end;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    .today {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .toolbar .buttons {
+    ::ng-deep {
+      .mat-raised-button {
+        font-size: 0;
+        padding: 0;
+        min-width: unset;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        box-shadow: unset!important;
+      }
+    }
+  }
+}

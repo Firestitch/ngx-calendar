@@ -1,10 +1,7 @@
-<button type="submit" mat-raised-button color="primary" routerLink="/">Back</button>
-<button type="submit" mat-raised-button color="primary" routerLink="/body/class/page1">Page 1</button>
-<button type="submit" mat-raised-button color="primary" routerLink="/body/class/page2">Page 2</button>
-<button 
-    type="submit"
-    mat-raised-button 
-    color="primary"
-    (click)="toogleHtmlClass()">
-  Toggle HTML Class
-</button>
+<div class="calendar">
+  <fs-calendar [config]="config">
+    <ng-template fsCalendarEvent let-event="event">
+      {{event.timeText}}
+    </ng-template>
+  </fs-calendar>
+</div>
