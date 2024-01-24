@@ -1,11 +1,11 @@
 {
-  "name": "@firestitch/html",
-  "title": "HTML",
-  "description": "@firestitch/html",
-  "version": "12.0.5",
+  "name": "@firestitch/calendar",
+  "title": "Calendar",
+  "description": "@firestitch/calendar",
+  "version": "12.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/ngx-html"
+    "url": "https://github.com/Firestitch/ngx-calendar"
   },
   "author": {
     "name": "Firestitch",
