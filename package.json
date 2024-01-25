@@ -31,7 +31,7 @@
     "@fullcalendar/timegrid": "^6.1.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.17",
+    "@angular-devkit/build-angular": "~17.1.1",
     "@angular-devkit/core": "^12.2.17",
     "@angular/animations": "^12.2.16",
     "@angular/cdk": "^12.2.13",
@@ -48,7 +48,7 @@
     "@firestitch/api": "^12.4.0",
     "@firestitch/autocomplete": "^12.5.1",
     "@firestitch/autocomplete-chips": "^12.5.8",
-    "@firestitch/component-tools": "^12.0.17",
+    "@firestitch/component-tools": "^13.0.1",
     "@firestitch/dialog": "^12.4.7",
     "@firestitch/chip": "^12.0.0",
     "@firestitch/drawer": "^12.0.0",
