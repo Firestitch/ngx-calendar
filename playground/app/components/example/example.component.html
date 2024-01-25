@@ -1,7 +1,8 @@
 <div class="calendar">
   <fs-calendar [config]="config">
-    <ng-template fsCalendarEvent let-event="event">
-      {{event.timeText}}
+    <ng-template fsCalendarEvent let-event="event" let-view="view" let-data="data" let-timeText="timeText">
+      {{timeText}}
+      <div>{{data.name}}</div>
     </ng-template>
   </fs-calendar>
 </div>

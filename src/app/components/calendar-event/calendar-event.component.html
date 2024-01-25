@@ -1,7 +1,29 @@
 <ng-container *ngIf="eventTemplate; else default">
-  <ng-container [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{ event: eventContentArg }"></ng-container>
+  <ng-container 
+    [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{ 
+      event: eventContentArg.event, 
+      data: eventContentArg.event.extendedProps, 
+      view: eventContentArg.view,
+      timeText: eventContentArg.timeText,
+      backgroundColor: eventContentArg.backgroundColor,
+      borderColor: eventContentArg.borderColor,
+      textColor: eventContentArg.textColor,
+      isDraggable: eventContentArg.isDraggable,
+      isStartResizable: eventContentArg.isStartResizable,
+      isEndResizable: eventContentArg.isEndResizable,
+      isStart: eventContentArg.isStart,
+      isEnd: eventContentArg.isEnd,
+      isPast: eventContentArg.isPast,
+      isFuture: eventContentArg.isFuture,
+      isToday: eventContentArg.isToday,
+      isSelected: eventContentArg.isSelected,
+      isDragging: eventContentArg.isDragging,
+      isResizing: eventContentArg.isResizing
+    }">
+    </ng-container>
 </ng-container>
 
 <ng-template #default>
   {{eventContentArg.timeText}}
 </ng-template>
+

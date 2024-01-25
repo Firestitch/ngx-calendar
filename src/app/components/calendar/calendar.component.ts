@@ -21,7 +21,7 @@ import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { FilterComponent, FilterConfig } from '@firestitch/filter';
 
 import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, delay, takeUntil } from 'rxjs/operators';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 
 import {
   Calendar,
@@ -135,7 +135,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     fromEvent(window, 'resize')
       .pipe(
         debounceTime(300),
-        delay(400),
         takeUntil(this._destroy$),
       )
       .subscribe((e: any) => {
@@ -214,6 +213,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
           return this.config.eventsFetch(info, query)
             .pipe(
+              map((events) => {
+
+                return events
+                  .map((event) => ({
+                    ...event,
+                    extendedProps: event.data,
+                    data: undefined,
+                  }),
+                  );
+              }),
               takeUntil(this._destroy$),
             )
             .toPromise();

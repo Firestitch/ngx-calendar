@@ -26,6 +26,9 @@ export class ExampleComponent implements OnInit {
           {
             start: new Date(),
             end: addHours(new Date(), 5),
+            data: {
+              name: 'Billy Bob',
+            },
           },
         ];
 
