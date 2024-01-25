@@ -176,6 +176,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       eventClassNames: (arg) => {
         return [];
       },
+      eventDrop:() => {
+
+      },
       selectable: false,
       eventContent: (arg: EventContentArg) => {
         const el = document.createElement('div');

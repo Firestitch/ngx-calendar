@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/calendar",
-  "version": "12.0.3",
+  "version": "12.0.4",
   "description": "@firestitch/calendar",
   "keywords": [
     "angular"
@@ -22,6 +22,13 @@
     "package:publish": "cd node_modules/@firestitch/component-tools && npm run cli:package:publish",
     "package:test": "cd node_modules/@firestitch/component-tools && npm run cli:package:test",
     "serve": "cd node_modules/@firestitch/component-tools && npm run cli:serve"
+  },
+  "peerDependencies ": {
+    "@fullcalendar/core": "^6.1.10",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/resource-timeline": "^6.1.10",
+    "@fullcalendar/timegrid": "^6.1.10"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
