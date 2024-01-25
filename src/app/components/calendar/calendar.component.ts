@@ -29,7 +29,6 @@ import {
 } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import rrulePlugin from '@fullcalendar/rrule';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { CalendarEventDirective } from '../../directives';
@@ -168,7 +167,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       stickyHeaderDates: true,
       nowIndicator: true,
       weekends: this.showWeekends,
-      plugins: [rrulePlugin, dayGridPlugin, timeGridPlugin, interactionPlugin],
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       views: {
         dayGridMonth: {
           displayEventEnd: true,
