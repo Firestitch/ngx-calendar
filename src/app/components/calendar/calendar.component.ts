@@ -33,7 +33,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { CalendarEventDirective } from '../../directives';
 import { CalendarView } from '../../enums';
-import { CalendarConfig } from '../../interfaces';
+import { CalendarConfig, CalendarEvent } from '../../interfaces';
 import { CalendarEventComponent } from '../calendar-event';
 
 
@@ -113,6 +113,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
+  }
+
+  public updateEvent(event: CalendarEvent): void {
+    const eventImpl = this.calendar.getEventById(event.id);
+
+    if(eventImpl) {
+      eventImpl.setDates(eventImpl.start, eventImpl.end, { allDay: eventImpl.allDay });
+      Object.keys(event.data)
+        .forEach((name) => {
+          eventImpl.setExtendedProp(name, event.data[name]);
+        });
+    }
   }
 
   private _initResize(): void {
