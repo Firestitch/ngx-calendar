@@ -119,7 +119,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     let eventImpl = this.calendar.getEventById(event.id);
 
     if(eventImpl) {
-      eventImpl.setDates(eventImpl.start, eventImpl.end, { allDay: eventImpl.allDay });
+      eventImpl.setDates(event.start, event.end, { allDay: event.allDay });
     } else {
       eventImpl = this.calendar.addEvent(event);
     }
