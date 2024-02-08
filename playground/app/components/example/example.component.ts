@@ -34,6 +34,9 @@ export class ExampleComponent implements OnInit {
 
         return of(events);
       },
+      fullcalendarConfig: {
+        selectable: true,
+      },
       filterConfig: {
         items: [
           {

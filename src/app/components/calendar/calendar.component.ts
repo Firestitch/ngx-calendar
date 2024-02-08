@@ -117,16 +117,23 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public updateEvent(event: CalendarEvent): void {
     let eventImpl = this.calendar.getEventById(event.id);
+    const data = event.data;
+    event.data = undefined;
 
     if(eventImpl) {
       eventImpl.setDates(event.start, event.end, { allDay: event.allDay });
     } else {
+      Object.keys(data)
+        .forEach((name) => {
+          event[name] = data[name];
+        });
+
       eventImpl = this.calendar.addEvent(event);
     }
 
-    Object.keys(event.data)
+    Object.keys(data)
       .forEach((name) => {
-        eventImpl.setExtendedProp(name, event.data[name]);
+        eventImpl.setExtendedProp(name, data[name]);
       });
   }
 
