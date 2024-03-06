@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/calendar",
-  "version": "12.0.11",
+  "version": "13.0.0",
   "description": "@firestitch/calendar",
   "keywords": [
     "angular"
@@ -21,7 +21,8 @@
     "package": "cd node_modules/@firestitch/component-tools && npm run cli:package",
     "package:publish": "cd node_modules/@firestitch/component-tools && npm run cli:package:publish",
     "package:test": "cd node_modules/@firestitch/component-tools && npm run cli:package:test",
-    "serve": "cd node_modules/@firestitch/component-tools && npm run cli:serve"
+    "serve": "cd node_modules/@firestitch/component-tools && npm run cli:serve",
+    "npm-update": "npx npm-check-updates -u \"/@firestitch/\" --target semver"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
@@ -48,12 +49,14 @@
     "@firestitch/api": "^12.4.0",
     "@firestitch/autocomplete": "^12.5.1",
     "@firestitch/autocomplete-chips": "^12.5.8",
-    "@firestitch/component-tools": "^12.0.17",
-    "@firestitch/dialog": "^12.4.7",
     "@firestitch/chip": "^12.0.0",
+    "@firestitch/component-tools": "^12.0.17",
+    "@firestitch/core": "^12.1.0",
+    "@firestitch/date": "^12.4.5",
+    "@firestitch/dialog": "^12.4.7",
     "@firestitch/drawer": "^12.0.0",
     "@firestitch/example": "^12.1.1",
-    "@firestitch/file": "^12.17.4",
+    "@firestitch/file": "^12.18.6",
     "@firestitch/filter": "^13.0.4",
     "@firestitch/iframe": "^12.0.7",
     "@firestitch/label": "^12.0.4",
@@ -62,18 +65,18 @@
     "@firestitch/message": "^12.3.1",
     "@firestitch/prompt": "^12.1.3",
     "@firestitch/selectbutton": "^12.0.4",
-    "hammerjs": "^2.0.8",
-    "lodash-es": "^4.17.21",
-    "rxjs": "^6.4.0",
-    "typescript": "4.3.5",
-    "zone.js": "~0.11.4",
-    "date-fns": "^2.28.0",
-    "date-fns-tz": "^1.3.5",
     "@fullcalendar/core": "^6.1.10",
     "@fullcalendar/daygrid": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
     "@fullcalendar/resource-timeline": "^6.1.10",
-    "@fullcalendar/timegrid": "^6.1.10"
+    "@fullcalendar/timegrid": "^6.1.10",
+    "date-fns": "^2.28.0",
+    "date-fns-tz": "^1.3.5",
+    "hammerjs": "^2.0.8",
+    "lodash-es": "^4.17.21",
+    "rxjs": "^6.4.0",
+    "typescript": "4.3.5",
+    "zone.js": "~0.11.4"
   },
   "engines": {
     "node": ">=6.0.0"
