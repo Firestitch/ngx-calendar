@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 
-import { CalendarConfig } from '@firestitch/calendar';
+import { CalendarComponent, CalendarConfig } from '@firestitch/calendar';
 import { ItemType } from '@firestitch/filter';
 
 import { of } from 'rxjs';
@@ -17,13 +17,30 @@ import { addHours } from 'date-fns';
 })
 export class ExampleComponent implements OnInit {
 
+  @ViewChild(CalendarComponent)
+  public calendar: CalendarComponent;
+
   public config: CalendarConfig;
 
   public ngOnInit(): void {
+    setTimeout(() => {
+      this.calendar.updateEvent({
+        id: '1',
+        start: new Date(),
+        end: addHours(new Date(), 5),
+        data: {
+          name: 'Billy Bob',
+        },
+        backgroundColor: 'pink',
+        borderColor: 'pink',
+      });
+    }, 1000);
+
     this.config = {
       eventsFetch: (data: EventSourceFuncArg) => {
         const events = [
           {
+            id: '1',
             start: new Date(),
             end: addHours(new Date(), 5),
             data: {

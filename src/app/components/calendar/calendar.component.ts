@@ -122,6 +122,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
     if(eventImpl) {
       eventImpl.setDates(event.start, event.end, { allDay: event.allDay });
+
+      [
+        'groupId', 'allDay', 'title', 'url', 'classNames', 'editable',
+        'startEditable','durationEditable', 'resourceEditable', 'display',
+        'overlap', 'constraint', 'backgroundColor', 'borderColor',
+        'textColor','source',
+      ]
+        .filter((name) => event[name] !== undefined)
+        .forEach((name) => {
+          eventImpl.setProp(name, event[name]);
+        });
+
     } else {
       Object.keys(data)
         .forEach((name) => {
@@ -199,7 +211,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         return [];
       },
       eventDrop:() => {
-
+        //
       },
       selectable: false,
       eventContent: (arg: EventContentArg) => {
