@@ -21,7 +21,7 @@ import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { FilterComponent, FilterConfig } from '@firestitch/filter';
 
 import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, throttleTime } from 'rxjs/operators';
 
 import {
   Calendar,
@@ -31,9 +31,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
+import { FsMenuComponent } from '@firestitch/menu';
 import { CalendarEventDirective } from '../../directives';
 import { CalendarView } from '../../enums';
-import { CalendarConfig, CalendarEvent } from '../../interfaces';
+import { CalendarConfig, CalendarEvent, ToolbarMenuItem } from '../../interfaces';
 import { CalendarEventComponent } from '../calendar-event';
 
 
@@ -54,6 +55,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   @ViewChild(FilterComponent, { static: false })
   public filter: FilterComponent;
 
+  @ViewChild(FsMenuComponent)
+  public menu: FsMenuComponent;
+
   @Input() public config: CalendarConfig;
 
   public title: string;
@@ -61,7 +65,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public showWeekends = true;
   public calendarView = CalendarView.Week;
   public CalendarView = CalendarView;
-  public toolbarMenuItems = [];
+  public toolbarMenuItems: ToolbarMenuItem[] = [];
   public filterConfig: FilterConfig;
 
   private _destroy$ = new Subject();
@@ -167,10 +171,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
     fromEvent(window, 'resize')
       .pipe(
-        debounceTime(300),
+        throttleTime(100),
         takeUntil(this._destroy$),
       )
-      .subscribe((e: any) => {
+      .subscribe(() => {
         this.calendar.render();
       });
   }
@@ -188,6 +192,30 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   private _initToolbarMenu(): void {
     this.toolbarMenuItems = this.config.toolbarMenuItems || [];
+
+    if(this.config.weekendToggle) {
+      this.toolbarMenuItems
+        .push({
+          label: 'Show weekends',
+          click: () => {
+            this.weekendToggle();
+          },
+          show: () => {
+            return this.showWeekends;
+          }
+        });
+
+      this.toolbarMenuItems
+        .push({
+          label: 'Hide weekends',
+          click: () => {
+            this.weekendToggle();
+          },
+          show: () => {
+            return !this.showWeekends;
+          }
+        });        
+    }
   }
 
   private _initCalendar(): void {

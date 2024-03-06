@@ -43,6 +43,7 @@
       <ng-container *ngFor="let toolbarMenuItem of toolbarMenuItems">
         <ng-template
             fs-menu-item
+            [show]="toolbarMenuItem.show"
             (click)="toolbarMenuItemClick(toolbarMenuItem)">
           {{toolbarMenuItem.label}}
         </ng-template>

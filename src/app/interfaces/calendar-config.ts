@@ -4,16 +4,14 @@ import { FilterConfig } from '@firestitch/filter';
 import { Observable } from 'rxjs';
 
 import { CalendarOptions, DurationInput, EventSourceFuncArg } from '@fullcalendar/core';
+import { ToolbarMenuItem } from './toolbar-menu-item';
 
 export interface CalendarConfig {
   eventsFetch?: (data: EventSourceFuncArg, query?) => Observable<CalendarEvent[]>;
   filterConfig?: FilterConfig;
   fullcalendarConfig?: CalendarOptions;
   weekendToggle?: boolean;
-  toolbarMenuItems?: {
-    label: string;
-    click?: () => void;
-  }[];
+  toolbarMenuItems?: ToolbarMenuItem[];
 }
 
 
