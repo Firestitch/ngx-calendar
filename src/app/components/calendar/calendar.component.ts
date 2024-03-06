@@ -219,6 +219,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   private _initCalendar(): void {
+    this.showWeekends = this.config.fullcalendarConfig.weekends ?? true;
     this.calendar = new Calendar(this.calendarEl.nativeElement, {
       headerToolbar: false,
       editable: true,

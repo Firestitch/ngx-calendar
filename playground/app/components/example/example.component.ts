@@ -54,6 +54,7 @@ export class ExampleComponent implements OnInit {
       },
       fullcalendarConfig: {
         selectable: true,
+        weekends: false,
       },
       filterConfig: {
         items: [
