@@ -319,6 +319,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     });
 
     this.calendar.render();
+
+    if(this.config.initialized) {
+      setTimeout(() => {
+        this.config.initialized();
+      });
+    }
   }
 
 }

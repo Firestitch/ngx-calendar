@@ -11,6 +11,7 @@ export interface CalendarConfig {
   filterConfig?: FilterConfig;
   fullcalendarConfig?: CalendarOptions;
   weekendToggle?: boolean;
+  initialized?: () => void;
   toolbarMenuItems?: ToolbarMenuItem[];
 }
 
