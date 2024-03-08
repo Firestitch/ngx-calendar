@@ -15,10 +15,13 @@
   </div>
 
   <div class="right">
-    <fs-filter
-      *ngIf="filterConfig"
-      [config]="filterConfig">
-    </fs-filter>
+    <ng-container *ngIf="filterConfig">
+      <fs-filter      
+        (closed)="filterClosed()"
+        (closed)="filterOpened()"
+        [config]="filterConfig">
+      </fs-filter>
+    </ng-container>
     
     <mat-select
       [(ngModel)]="calendarView"

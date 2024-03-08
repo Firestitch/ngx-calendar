@@ -39,7 +39,6 @@ export class ExampleComponent implements OnInit {
     this.config = {
       weekendToggle: true,
       initialized: () => {
-        debugger;
       },
       eventsFetch: (data: EventSourceFuncArg) => {
         const events = [

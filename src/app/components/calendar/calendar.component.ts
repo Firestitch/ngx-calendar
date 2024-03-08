@@ -79,7 +79,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   ) { }
 
   public ngAfterContentInit(): void {
-    this._initCalendar();
+    setTimeout(() => {
+      this._initCalendar();  
+    });    
   }
 
   public ngOnInit(): void {
@@ -117,6 +119,18 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
+  }
+
+  public filterClosed(): void {
+    setTimeout(() => {
+      this.calendar.render();
+    });
+  }
+
+  public filterOpened(): void {
+    setTimeout(() => {
+      this.calendar.render();
+    });
   }
 
   public updateEvent(event: CalendarEvent): void {
