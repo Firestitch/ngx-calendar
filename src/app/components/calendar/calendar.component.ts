@@ -75,6 +75,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     private _appRef: ApplicationRef,
     private _injector: Injector,
     private _cdRef: ChangeDetectorRef,
+    private _el: ElementRef,
     private _breakpointObserver: BreakpointObserver,
   ) { }
 
@@ -355,7 +356,19 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     if(this.config.initialized) {
       setTimeout(() => {
         this.config.initialized();
+
+        if(this.config.weekScrollToTime) {
+          this.weekScrollToTime(this.config.weekScrollToTime);
+        }
       });
+    }
+  }
+
+  public weekScrollToTime(time): void {
+    const el: any = this._el.nativeElement.querySelector(`td[data-time="${time}"]`);
+    if(el) {
+      const cal: any = this._el.nativeElement.querySelector('.calendar');
+      cal?.scrollTo({ top: el.offsetTop });
     }
   }
 

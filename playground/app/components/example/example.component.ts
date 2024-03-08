@@ -40,6 +40,7 @@ export class ExampleComponent implements OnInit {
       weekendToggle: true,
       initialized: () => {
       },
+      weekScrollToTime: '08:00:00',
       eventsFetch: (data: EventSourceFuncArg) => {
         const events = [
           {
@@ -55,6 +56,7 @@ export class ExampleComponent implements OnInit {
         return of(events);
       },
       fullcalendarConfig: {
+        slotDuration: '00:15:00',
         selectable: true,
         weekends: false,
       },
