@@ -353,15 +353,15 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
     this.calendar.render();
 
-    if(this.config.initialized) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if(this.config.initialized) {
         this.config.initialized();
+      }
 
-        if(this.config.weekScrollToTime) {
-          this.weekScrollToTime(this.config.weekScrollToTime);
-        }
-      });
-    }
+      if(this.config.weekScrollToTime) {
+        this.weekScrollToTime(this.config.weekScrollToTime);
+      }
+    });
   }
 
   public weekScrollToTime(time): void {
