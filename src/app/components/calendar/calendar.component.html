@@ -38,7 +38,7 @@
   </div>
 
 </div>
-<div class="calendar">
+<div class="calendar" [ngClass]="{ 'hide-day-today': !(config.dayToday ?? false) }">
   <div #calendar></div>
   <div class="bottom-line"></div>
 </div>

@@ -60,6 +60,14 @@ fs-filter {
   flex: 1;
   height: 100%;
   overflow: auto;
+
+  &.hide-day-today {
+    ::ng-deep {
+      .fc-timegrid-col.fc-day-today {
+        background-color: transparent;
+      }
+    }
+  }
 }
 
 .toolbar {
