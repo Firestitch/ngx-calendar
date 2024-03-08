@@ -18,7 +18,7 @@ import {
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 
-import { FilterComponent, FilterConfig } from '@firestitch/filter';
+import { ActionMode, ActionType, FilterComponent, FilterConfig } from '@firestitch/filter';
 
 import { fromEvent, Subject } from 'rxjs';
 import { map, takeUntil, throttleTime } from 'rxjs/operators';
@@ -200,6 +200,24 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         change: () => {
           this.calendar.refetchEvents();
         },
+        actions: [
+          {
+            mode: ActionMode.SelectButton,
+            label: 'View',
+            type: ActionType.Stroked,
+            primary: false,
+            default: this.calendarView,
+            change: (value) => {
+              this.calendarViewChange(value);
+            },
+            values: [
+              { name: 'Day', value: CalendarView.Day },
+              { name: 'Week', value: CalendarView.Week },
+              { name: 'Month', value: CalendarView.Month },
+            ],
+          },
+          ...(this.config.filterConfig?.actions || []),
+        ]
       };
     }
   }

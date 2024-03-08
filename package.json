@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/calendar",
-  "version": "13.0.4",
+  "version": "13.0.5",
   "description": "@firestitch/calendar",
   "keywords": [
     "angular"
@@ -57,7 +57,7 @@
     "@firestitch/drawer": "^12.2.3",
     "@firestitch/example": "^12.1.1",
     "@firestitch/file": "^12.18.6",
-    "@firestitch/filter": "^13.0.8",
+    "@firestitch/filter": "^13.0.9",
     "@firestitch/iframe": "^12.0.7",
     "@firestitch/label": "^12.0.4",
     "@firestitch/lint": "^12.0.20",

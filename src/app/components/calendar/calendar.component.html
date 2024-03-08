@@ -23,37 +23,19 @@
       </fs-filter>
     </ng-container>
     
-    <mat-select
-      [(ngModel)]="calendarView"
-      fsSelectButton
-      [buttonType]="'stroked'"
-      (ngModelChange)="calendarViewChange($event)"
-      placeholder="Unselected"
-      class="calendar-view">
-    <mat-option [value]="CalendarView.Day">
-      Day
-    </mat-option>
-    <mat-option [value]="CalendarView.Week">
-      Week
-    </mat-option>
-    <mat-option [value]="CalendarView.Month">
-      Month
-    </mat-option>
-  </mat-select>
-
-  <ng-container *ngIf="toolbarMenuItems.length">
-    <fs-menu>
-      <ng-container *ngFor="let toolbarMenuItem of toolbarMenuItems">
-        <ng-template
-            fs-menu-item
-            [show]="toolbarMenuItem.show"
-            (click)="toolbarMenuItemClick(toolbarMenuItem)">
-          {{toolbarMenuItem.label}}
-        </ng-template>
-      </ng-container>
-    </fs-menu>
-  </ng-container>
-</div>
+    <ng-container *ngIf="toolbarMenuItems.length">
+      <fs-menu>
+        <ng-container *ngFor="let toolbarMenuItem of toolbarMenuItems">
+          <ng-template
+              fs-menu-item
+              [show]="toolbarMenuItem.show"
+              (click)="toolbarMenuItemClick(toolbarMenuItem)">
+            {{toolbarMenuItem.label}}
+          </ng-template>
+        </ng-container>
+      </fs-menu>
+    </ng-container>
+  </div>
 
 </div>
 <div class="calendar">
