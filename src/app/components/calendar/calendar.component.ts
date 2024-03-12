@@ -348,6 +348,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         const month = startMonth === endMonth ? startMonth : `${startMonth} - ${endMonth}`;
 
         this.title = `${month} ${this.calendar.view.activeStart.getFullYear()}`;
+        this._cdRef.markForCheck();
       },
     });
 
