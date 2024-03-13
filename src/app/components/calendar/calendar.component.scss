@@ -18,8 +18,12 @@
       .number {
         font-size: 140%;
         color: #454545;
-        margin: 4px 0;
+        margin-top: 1px;
       }
+  }
+
+  .fc-col-header-cell-cushion {
+    padding-bottom: 5px;
   }
 
   .fc-scrollgrid,

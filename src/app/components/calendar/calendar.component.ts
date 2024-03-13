@@ -327,11 +327,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         }
       },
       dayHeaderContent : (e) => {
-        return { html: `
-          <div class="name">${e.date.toLocaleString('en-US', { weekday: 'short' })}</div>
-          <div class="number">${e.date.getDate()}</div>
-          `,
-        };
+        let html = `<div class="name">${e.date.toLocaleString('en-US', { weekday: 'short' })}</div>`;
+
+        if(this.calendarView !== CalendarView.Month) {
+          html += `<div class="number">${e.date.getDate()}</div>`;
+        }
+
+        return { html };
       },
       ...this.config.fullcalendarConfig,
       eventsSet: (data) => {
