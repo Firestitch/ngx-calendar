@@ -4,6 +4,7 @@ import { FilterConfig } from '@firestitch/filter';
 import { Observable } from 'rxjs';
 
 import { CalendarOptions, DurationInput, EventSourceFuncArg } from '@fullcalendar/core';
+import { CalendarView } from '../enums';
 import { ToolbarMenuItem } from './toolbar-menu-item';
 
 export interface CalendarConfig {
@@ -15,6 +16,8 @@ export interface CalendarConfig {
   weekScrollToTime?: string;
   initialized?: () => void;
   toolbarMenuItems?: ToolbarMenuItem[];
+  views?: CalendarView[];
+  defaultView?: CalendarView;
 }
 
 
@@ -36,4 +39,5 @@ export interface CalendarEvent {
   durationEditable?: boolean;
   display?: 'auto' | 'block' | 'list-item' | 'background' | 'inverse-background' | 'none';
   duration?: DurationInput;
+
 }

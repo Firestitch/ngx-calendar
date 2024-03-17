@@ -63,7 +63,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public title: string;
   public calendar: Calendar;
   public showWeekends = true;
-  public calendarView = CalendarView.Week;
+  public calendarView: CalendarView;
   public CalendarView = CalendarView;
   public toolbarMenuItems: ToolbarMenuItem[] = [];
   public filterConfig: FilterConfig;
@@ -86,6 +86,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   public ngOnInit(): void {
+    this._initConfig(this.config);
     this._initResize();
     this._initFilterConfig();
     this._initToolbarMenu();
@@ -168,6 +169,20 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       });
   }
 
+  private _initConfig(config: CalendarConfig): void {
+    this.config = {
+      ...config,
+      views: config.views || [
+        CalendarView.Day,
+        CalendarView.Week,
+        CalendarView.Month,
+      ],
+      defaultView: CalendarView.Week,
+    };
+
+    this.calendarView = this.config.defaultView;
+  }
+
   private _initResize(): void {
     this._breakpointObserver.observe([
       '(max-width: 599px)',
@@ -215,7 +230,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
               { name: 'Day', value: CalendarView.Day },
               { name: 'Week', value: CalendarView.Week },
               { name: 'Month', value: CalendarView.Month },
-            ],
+            ]
+            .filter((view) => {
+              debugger;
+              return this.config.views.indexOf(view.value) !== -1;
+            }),
           },
           ...(this.config.filterConfig?.actions || []),
         ]
