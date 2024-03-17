@@ -69,6 +69,9 @@ export class ExampleComponent implements OnInit {
           },
         ],
       },
+      // views: [
+      //   CalendarView.Week,
+      // ],
       toolbarMenuItems: [
         {
           label: 'Do Something',

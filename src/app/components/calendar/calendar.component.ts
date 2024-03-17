@@ -211,31 +211,39 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   private _initFilterConfig(): void {
     if(this.config.filterConfig) {
+
+      const actions = [];
+      const values = [
+        { name: 'Day', value: CalendarView.Day },
+        { name: 'Week', value: CalendarView.Week },
+        { name: 'Month', value: CalendarView.Month },
+      ]
+      .filter((view) => {
+        debugger;
+        return this.config.views.indexOf(view.value) !== -1;
+      });
+
+      if(values.length > 1) {
+        actions.push({
+          mode: ActionMode.SelectButton,
+          label: 'View',
+          type: ActionType.Stroked,
+          primary: false,
+          default: this.calendarView,
+          change: (value) => {
+            this.calendarViewChange(value);
+          },
+          values,
+        });
+      }
+
       this.filterConfig = {
         ...this.config.filterConfig,
         change: () => {
           this.calendar.refetchEvents();
         },
         actions: [
-          {
-            mode: ActionMode.SelectButton,
-            label: 'View',
-            type: ActionType.Stroked,
-            primary: false,
-            default: this.calendarView,
-            change: (value) => {
-              this.calendarViewChange(value);
-            },
-            values: [
-              { name: 'Day', value: CalendarView.Day },
-              { name: 'Week', value: CalendarView.Week },
-              { name: 'Month', value: CalendarView.Month },
-            ]
-            .filter((view) => {
-              debugger;
-              return this.config.views.indexOf(view.value) !== -1;
-            }),
-          },
+          ...actions,
           ...(this.config.filterConfig?.actions || []),
         ]
       };
