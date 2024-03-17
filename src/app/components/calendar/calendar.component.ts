@@ -219,7 +219,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         { name: 'Month', value: CalendarView.Month },
       ]
       .filter((view) => {
-        debugger;
         return this.config.views.indexOf(view.value) !== -1;
       });
 
