@@ -24,13 +24,13 @@ export interface CalendarConfig {
 export interface CalendarEvent {
   id?: string;
   title?: string;
-  start: Date;
+  start: Date|string;
   groupId?: string;
   backgroundColor?: string;
   borderColor?: string;
   textColor?: string;
   classNames?: string[];
-  end: Date;
+  end?: Date|string;
   data?: { [key: string]: any };
   allDay?: boolean;
   editable?: boolean;

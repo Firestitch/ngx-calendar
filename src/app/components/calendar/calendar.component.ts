@@ -301,6 +301,17 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       eventDrop:() => {
         //
       },
+      viewDidMount: ({ el, view }) => {
+        const table = el.firstElementChild;
+        const thead = table.querySelector(':scope > thead');
+        const tbodys = table.querySelectorAll(':scope > tbody');
+        tbodys.forEach((tbody) => {
+          const allDayText = view.calendar.getOption('allDayText');
+          if(tbody.innerHTML.indexOf(allDayText) !== -1) {
+            thead.append(tbody.querySelector('tr'));
+          }
+        });
+    },
       selectable: false,
       eventContent: (arg: EventContentArg) => {
         const el = document.createElement('div');

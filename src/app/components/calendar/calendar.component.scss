@@ -26,6 +26,22 @@
     padding-bottom: 5px;
   }
 
+  .fc-timegrid-divider {
+    display: none;
+  }
+
+  .fc-scrollgrid {
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+
+      td {
+        background-color: #fff;
+      }
+    }
+  }
+
   .fc-scrollgrid,
   .fc-timegrid-axis,
   .fc-scrollgrid-section > *,

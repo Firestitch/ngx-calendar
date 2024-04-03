@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 
-import { CalendarComponent, CalendarConfig } from '@firestitch/calendar';
+import { CalendarComponent, CalendarConfig, CalendarEvent } from '@firestitch/calendar';
 import { ItemType } from '@firestitch/filter';
 
 import { of } from 'rxjs';
 
 import { EventSourceFuncArg } from '@fullcalendar/core';
-import { addHours } from 'date-fns';
+import { addDays, addHours } from 'date-fns';
 
 
 @Component({
@@ -42,13 +42,24 @@ export class ExampleComponent implements OnInit {
       },
       weekScrollToTime: '08:00:00',
       eventsFetch: (data: EventSourceFuncArg) => {
-        const events = [
+        const events: CalendarEvent[] = [
           {
             id: '1',
             start: new Date(),
             end: addHours(new Date(), 5),
             data: {
               name: 'Billy Bob',
+            },
+          },
+          {
+            id: '2',
+            // start: format(addDays(new Date(),1),'yyyy-MM-dd'),
+            // end: format(addDays(new Date(),2),'yyyy-MM-dd'),
+            start: addDays(new Date(),1),
+            end: addDays(new Date(),2),
+            allDay: true,
+            data: {
+              name: 'Jane Smith',
             },
           },
         ];
@@ -59,6 +70,7 @@ export class ExampleComponent implements OnInit {
         slotDuration: '00:15:00',
         selectable: true,
         weekends: false,
+        allDaySlot: true,
       },
       filterConfig: {
         items: [
