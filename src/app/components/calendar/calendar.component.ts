@@ -302,13 +302,16 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         //
       },
       viewDidMount: ({ el, view }) => {
+        const allDayText = view.calendar.getOption('allDayText');
+        view.calendar.setOption('allDayText', 'All day');
         const table = el.firstElementChild;
         const thead = table.querySelector(':scope > thead');
         const tbodys = table.querySelectorAll(':scope > tbody');
         tbodys.forEach((tbody) => {
-          const allDayText = view.calendar.getOption('allDayText');
           if(tbody.innerHTML.indexOf(allDayText) !== -1) {
-            thead.append(tbody.querySelector('tr'));
+            const tr = tbody.querySelector('tr');
+            tr.classList.add('all-day-row');
+            thead.append(tr);
           }
         });
     },
