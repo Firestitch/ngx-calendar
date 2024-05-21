@@ -19,6 +19,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 
 import { ActionMode, ActionType, FilterComponent, FilterConfig } from '@firestitch/filter';
+import { FsMenuComponent } from '@firestitch/menu';
 
 import { fromEvent, Subject } from 'rxjs';
 import { map, takeUntil, throttleTime } from 'rxjs/operators';
@@ -31,7 +32,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { FsMenuComponent } from '@firestitch/menu';
 import { CalendarEventDirective } from '../../directives';
 import { CalendarView } from '../../enums';
 import { CalendarConfig, CalendarEvent, ToolbarMenuItem } from '../../interfaces';
@@ -81,8 +81,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public ngAfterContentInit(): void {
     setTimeout(() => {
-      this._initCalendar();  
-    });    
+      this._initCalendar();
+    });
   }
 
   public ngOnInit(): void {
@@ -116,6 +116,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public weekendToggle(): void {
     this.showWeekends = !this.showWeekends;
     this.calendar.setOption('weekends', this.showWeekends);
+    this.calendar.refetchEvents();
   }
 
   public ngOnDestroy(): void {
@@ -140,14 +141,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     const data = event.data;
     event.data = undefined;
 
-    if(eventImpl) {
+    if (eventImpl) {
       eventImpl.setDates(event.start, event.end, { allDay: event.allDay });
 
       [
         'groupId', 'allDay', 'title', 'url', 'classNames', 'editable',
-        'startEditable','durationEditable', 'resourceEditable', 'display',
+        'startEditable', 'durationEditable', 'resourceEditable', 'display',
         'overlap', 'constraint', 'backgroundColor', 'borderColor',
-        'textColor','source',
+        'textColor', 'source',
       ]
         .filter((name) => event[name] !== undefined)
         .forEach((name) => {
@@ -210,7 +211,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   private _initFilterConfig(): void {
-    if(this.config.filterConfig) {
+    if (this.config.filterConfig) {
 
       const actions = [];
       const values = [
@@ -218,11 +219,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         { name: 'Week', value: CalendarView.Week },
         { name: 'Month', value: CalendarView.Month },
       ]
-      .filter((view) => {
-        return this.config.views.indexOf(view.value) !== -1;
-      });
+        .filter((view) => {
+          return this.config.views.indexOf(view.value) !== -1;
+        });
 
-      if(values.length > 1) {
+      if (values.length > 1) {
         actions.push({
           mode: ActionMode.SelectButton,
           label: 'View',
@@ -244,7 +245,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         actions: [
           ...actions,
           ...(this.config.filterConfig?.actions || []),
-        ]
+        ],
       };
     }
   }
@@ -252,7 +253,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   private _initToolbarMenu(): void {
     this.toolbarMenuItems = this.config.toolbarMenuItems || [];
 
-    if(this.config.weekendToggle) {
+    if (this.config.weekendToggle) {
       this.toolbarMenuItems
         .push({
           label: 'Show weekends',
@@ -261,7 +262,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
           },
           show: () => {
             return this.showWeekends;
-          }
+          },
         });
 
       this.toolbarMenuItems
@@ -272,8 +273,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
           },
           show: () => {
             return !this.showWeekends;
-          }
-        });        
+          },
+        });
     }
   }
 
@@ -298,7 +299,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       eventClassNames: (arg) => {
         return [];
       },
-      eventDrop:() => {
+      eventDrop: () => {
         //
       },
       viewDidMount: ({ el, view }) => {
@@ -308,13 +309,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         const thead = table.querySelector(':scope > thead');
         const tbodys = table.querySelectorAll(':scope > tbody');
         tbodys.forEach((tbody) => {
-          if(tbody.innerHTML.indexOf(allDayText) !== -1) {
+          if (tbody.innerHTML.indexOf(allDayText) !== -1) {
             const tr = tbody.querySelector('tr');
             tr.classList.add('all-day-row');
             thead.append(tr);
           }
         });
-    },
+      },
       selectable: false,
       eventContent: (arg: EventContentArg) => {
         const el = document.createElement('div');
@@ -346,7 +347,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         return { domNodes: [el] };
       },
       events: (info) => {
-        if(this.config.eventsFetch) {
+        if (this.config.eventsFetch) {
           const query = this.filter?.filterParamsQuery || {};
 
           return this.config.eventsFetch(info, query)
@@ -366,10 +367,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
             .toPromise();
         }
       },
-      dayHeaderContent : (e) => {
+      dayHeaderContent: (e) => {
         let html = `<div class="name">${e.date.toLocaleString('en-US', { weekday: 'short' })}</div>`;
 
-        if(this.calendarView !== CalendarView.Month) {
+        if (this.calendarView !== CalendarView.Month) {
           html += `<div class="number">${e.date.getDate()}</div>`;
         }
 
@@ -377,7 +378,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       },
       ...this.config.fullcalendarConfig,
       eventsSet: (data) => {
-        if(this.config.fullcalendarConfig?.eventsSet) {
+        if (this.config.fullcalendarConfig?.eventsSet) {
           this.config.fullcalendarConfig.eventsSet(data);
         }
 
@@ -397,11 +398,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     this.calendar.render();
 
     setTimeout(() => {
-      if(this.config.initialized) {
+      if (this.config.initialized) {
         this.config.initialized();
       }
 
-      if(this.config.weekScrollToTime) {
+      if (this.config.weekScrollToTime) {
         this.weekScrollToTime(this.config.weekScrollToTime);
       }
     });
@@ -409,7 +410,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public weekScrollToTime(time): void {
     const el: any = this._el.nativeElement.querySelector(`td[data-time="${time}"]`);
-    if(el) {
+    if (el) {
       const cal: any = this._el.nativeElement.querySelector('.calendar');
       cal?.scrollTo({ top: el.offsetTop });
     }
