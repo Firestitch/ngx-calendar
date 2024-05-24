@@ -12,7 +12,7 @@ import { FsMenuModule } from '@firestitch/menu';
 import { FsSelectButtonModule } from '@firestitch/selectbutton';
 
 import { CalendarComponent, CalendarEventComponent } from './components';
-import { CalendarEventDirective } from './directives';
+import { CalendarEventDirective, CalendarToolbarLeftDirective } from './directives';
 
 
 @NgModule({
@@ -29,14 +29,16 @@ import { CalendarEventDirective } from './directives';
     FsMenuModule,
     FsSelectButtonModule,
   ],
-  exports: [
-    CalendarComponent,
-    CalendarEventDirective,
-  ],
   declarations: [
     CalendarComponent,
     CalendarEventDirective,
     CalendarEventComponent,
+    CalendarToolbarLeftDirective,
+  ],
+  exports: [
+    CalendarComponent,
+    CalendarEventDirective,
+    CalendarToolbarLeftDirective,
   ],
 })
 export class FsCalendarModule {

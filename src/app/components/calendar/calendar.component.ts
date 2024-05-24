@@ -32,7 +32,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { CalendarEventDirective } from '../../directives';
+import { CalendarEventDirective, CalendarToolbarLeftDirective } from '../../directives';
 import { CalendarView } from '../../enums';
 import { CalendarConfig, CalendarEvent, ToolbarMenuItem } from '../../interfaces';
 import { CalendarEventComponent } from '../calendar-event';
@@ -48,6 +48,9 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   @ContentChild(CalendarEventDirective, { read: TemplateRef })
   public eventTemplate: TemplateRef<CalendarEventDirective>;
+  
+  @ContentChild(CalendarToolbarLeftDirective, { read: TemplateRef })
+  public toolbarLeftTemplate: TemplateRef<CalendarToolbarLeftDirective>;
 
   @ViewChild('calendar', { static: true, read: ElementRef })
   public calendarEl;

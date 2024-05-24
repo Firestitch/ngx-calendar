@@ -1,8 +1,22 @@
 <div class="calendar">
   <fs-calendar [config]="config">
-    <ng-template fsCalendarEvent let-event="event" let-view="view" let-data="data" let-timeText="timeText">
+    <ng-template 
+        fsCalendarEvent 
+        let-event="event" 
+        let-view="view" 
+        let-data="data" 
+        let-timeText="timeText">
       {{timeText}}
       <div>{{data.name}}</div>
+    </ng-template>
+    <ng-template 
+        fsCalendarToolbarLeft
+        let-todayTemplate="todayTemplate"
+        let-navTemplate="navTemplate"
+        let-titleTemplate="titleTemplate">
+      <ng-container [ngTemplateOutlet]="todayTemplate"></ng-container>
+      <ng-container [ngTemplateOutlet]="navTemplate"></ng-container>
+      <ng-container [ngTemplateOutlet]="titleTemplate"></ng-container>
     </ng-template>
   </fs-calendar>
 </div>

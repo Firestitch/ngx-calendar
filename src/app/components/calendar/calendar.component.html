@@ -1,17 +1,37 @@
 <div class="toolbar">
   <div class="left">
-    <a  
-        mat-stroked-button
-        class="today"
-        (click)="today()">
-      Today
-    </a>
-    <span class="prev-next">
-      <a mat-icon-button (click)="calendarPrev()"><mat-icon>chevron_left</mat-icon></a>
-      <a mat-icon-button (click)="calendarNext()"><mat-icon>chevron_right</mat-icon></a>
-    </span>
+    <ng-template #todayTemplate>
+      <a  
+          mat-stroked-button
+          class="today"
+          (click)="today()">
+        Today
+      </a>
+    </ng-template>
+    <ng-template #navTemplate>
+      <span class="prev-next">
+        <a mat-icon-button (click)="calendarPrev()"><mat-icon>chevron_left</mat-icon></a>
+        <a mat-icon-button (click)="calendarNext()"><mat-icon>chevron_right</mat-icon></a>
+      </span>
+    </ng-template>
+    
+    <ng-template #titleTemplate>
+      <div class="title">{{title}}</div>
+    </ng-template>
 
-    <div class="title">{{title}}</div>
+    <ng-container *ngIf="toolbarLeftTemplate">
+      <ng-container 
+        [ngTemplateOutlet]="toolbarLeftTemplate" 
+        [ngTemplateOutletContext]="{ todayTemplate, titleTemplate, navTemplate }">
+      </ng-container>    
+    </ng-container>
+    
+    <ng-container *ngIf="!toolbarLeftTemplate">
+      <ng-container [ngTemplateOutlet]="todayTemplate"></ng-container>
+      <ng-container [ngTemplateOutlet]="navTemplate"></ng-container>
+      <ng-container [ngTemplateOutlet]="titleTemplate"></ng-container>
+    </ng-container>
+
   </div>
 
   <div class="right">
