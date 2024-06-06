@@ -39,6 +39,7 @@ export class ExampleComponent implements OnInit {
     this.config = {
       weekendToggle: true,
       initialized: () => {
+        //
       },
       weekScrollToTime: '08:00:00',
       eventsFetch: (data: EventSourceFuncArg) => {
@@ -69,8 +70,9 @@ export class ExampleComponent implements OnInit {
       fullcalendarConfig: {
         slotDuration: '00:15:00',
         selectable: true,
-        weekends: false,
+        weekends: true,
         allDaySlot: true,
+        //timeZone: 'America/Toronto',
       },
       filterConfig: {
         items: [
