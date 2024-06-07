@@ -31,6 +31,7 @@ import {
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { format } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 
 import { CalendarEventDirective, CalendarToolbarLeftDirective } from '../../directives';
@@ -372,11 +373,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         }
       },
       dayHeaderContent: (e) => {
-        const name = formatInTimeZone(e.date, 'UTC', 'E');
+        const timezone = this.calendar.getOption('timeZone');
+        const name = timezone === 'local' ? format(e.date, 'E') : formatInTimeZone(e.date, 'UTC', 'E');
         let html = `<div class="name">${name}</div>`;
 
         if (this.calendarView !== CalendarView.Month) {
-          const number = formatInTimeZone(e.date, 'UTC', 'd');
+          const number =  timezone === 'local' ? format(e.date, 'd') : formatInTimeZone(e.date, 'UTC', 'd');
           html += `<div class="number">${number}</div>`;
         }
 
