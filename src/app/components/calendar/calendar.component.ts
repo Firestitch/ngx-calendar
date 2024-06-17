@@ -311,7 +311,13 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         const allDayText = view.calendar.getOption('allDayText');
         view.calendar.setOption('allDayText', 'All day');
         const table = el.firstElementChild;
-        const thead = table.querySelector(':scope > thead');
+        let thead = table.querySelector(':scope > thead');
+
+        if(!thead) {
+          thead = document.createElement('thead');
+          table.append(thead);
+        }         
+
         const tbodys = table.querySelectorAll(':scope > tbody');
         tbodys.forEach((tbody) => {
           if (tbody.innerHTML.indexOf(allDayText) !== -1) {
@@ -411,12 +417,12 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       }
 
       if (this.config.weekScrollToTime) {
-        this.weekScrollToTime(this.config.weekScrollToTime);
+        this._weekScrollToTime(this.config.weekScrollToTime);
       }
     });
   }
 
-  public weekScrollToTime(time): void {
+  private _weekScrollToTime(time): void {
     const el: any = this._el.nativeElement.querySelector(`td[data-time="${time}"]`);
     if (el) {
       const cal: any = this._el.nativeElement.querySelector('.calendar');
