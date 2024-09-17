@@ -50,7 +50,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   @ContentChild(CalendarEventDirective, { read: TemplateRef })
   public eventTemplate: TemplateRef<CalendarEventDirective>;
-  
+
   @ContentChild(CalendarToolbarLeftDirective, { read: TemplateRef })
   public toolbarLeftTemplate: TemplateRef<CalendarToolbarLeftDirective>;
 
@@ -284,7 +284,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   private _initCalendar(): void {
-    this.showWeekends = this.config.fullcalendarConfig.weekends ?? true;
+    this.showWeekends = this.config.fullcalendarConfig.weekends === undefined || this.config.fullcalendarConfig.weekends === null
+      ? true
+      : this.config.fullcalendarConfig.weekends;
+
     this.calendar = new Calendar(this.calendarEl.nativeElement, {
       headerToolbar: false,
       editable: true,
@@ -313,10 +316,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         const table = el.firstElementChild;
         let thead = table.querySelector(':scope > thead');
 
-        if(!thead) {
+        if (!thead) {
           thead = document.createElement('thead');
           table.append(thead);
-        }         
+        }
 
         const tbodys = table.querySelectorAll(':scope > tbody');
         tbodys.forEach((tbody) => {
@@ -384,7 +387,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         let html = `<div class="name">${name}</div>`;
 
         if (this.calendarView !== CalendarView.Month) {
-          const number =  timezone === 'local' ? format(e.date, 'd') : formatInTimeZone(e.date, 'UTC', 'd');
+          const number = timezone === 'local' ? format(e.date, 'd') : formatInTimeZone(e.date, 'UTC', 'd');
           html += `<div class="number">${number}</div>`;
         }
 
