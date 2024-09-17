@@ -257,7 +257,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   private _initToolbarMenu(): void {
     this.toolbarMenuItems = this.config.toolbarMenuItems || [];
-
     if (this.config.weekendToggle) {
       this.toolbarMenuItems
         .push({
@@ -266,7 +265,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
             this.weekendToggle();
           },
           show: () => {
-            return this.showWeekends;
+            return !this.showWeekends;
           },
         });
 
@@ -277,7 +276,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
             this.weekendToggle();
           },
           show: () => {
-            return !this.showWeekends;
+            return this.showWeekends;
           },
         });
     }

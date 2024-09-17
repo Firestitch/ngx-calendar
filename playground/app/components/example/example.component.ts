@@ -56,8 +56,8 @@ export class ExampleComponent implements OnInit {
             id: '2',
             // start: format(addDays(new Date(),1),'yyyy-MM-dd'),
             // end: format(addDays(new Date(),2),'yyyy-MM-dd'),
-            start: addDays(new Date(),1),
-            end: addDays(new Date(),2),
+            start: addDays(new Date(), 1),
+            end: addDays(new Date(), 2),
             allDay: true,
             data: {
               name: 'Jane Smith',
@@ -70,7 +70,7 @@ export class ExampleComponent implements OnInit {
       fullcalendarConfig: {
         slotDuration: '00:15:00',
         selectable: true,
-        weekends: true,
+        weekends: false,
         allDaySlot: true,
         //timeZone: 'America/Toronto',
       },
