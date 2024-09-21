@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 
-import { CalendarComponent, CalendarConfig, CalendarEvent } from '@firestitch/calendar';
+import { CalendarComponent, CalendarConfig, CalendarEvent, CalendarView } from '@firestitch/calendar';
 import { ItemType } from '@firestitch/filter';
 
 import { of } from 'rxjs';
@@ -41,7 +41,10 @@ export class ExampleComponent implements OnInit {
       initialized: () => {
         //
       },
+      initialView: CalendarView.Day,
+      initialDate: new Date(),
       weekScrollToTime: '08:00:00',
+      weekends: false,
       eventsFetch: (data: EventSourceFuncArg) => {
         const events: CalendarEvent[] = [
           {
@@ -70,7 +73,6 @@ export class ExampleComponent implements OnInit {
       fullcalendarConfig: {
         slotDuration: '00:15:00',
         selectable: true,
-        weekends: false,
         allDaySlot: true,
         //timeZone: 'America/Toronto',
       },

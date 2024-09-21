@@ -4,7 +4,9 @@ import { FilterConfig } from '@firestitch/filter';
 import { Observable } from 'rxjs';
 
 import { CalendarOptions, DurationInput, EventSourceFuncArg } from '@fullcalendar/core';
+
 import { CalendarView } from '../enums';
+
 import { ToolbarMenuItem } from './toolbar-menu-item';
 
 export interface CalendarConfig {
@@ -14,7 +16,10 @@ export interface CalendarConfig {
   weekendToggle?: boolean;
   dayToday?: boolean;
   weekScrollToTime?: string;
+  weekends?: boolean,
   initialized?: () => void;
+  initialView?: CalendarView;
+  initialDate?: Date;
   toolbarMenuItems?: ToolbarMenuItem[];
   views?: CalendarView[];
   defaultView?: CalendarView;

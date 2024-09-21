@@ -98,7 +98,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   public today(): void {
-    this.calendar.today();
+    this.calendar.gotoDate(new Date());
   }
 
   public calendarPrev(): void {
@@ -110,6 +110,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   public calendarViewChange(value: CalendarView): void {
+    if(!this.config.weekends) {
+      if((value === CalendarView.Month || value === CalendarView.Week)) {
+        this.calendar.setOption('weekends',false);
+      } else {
+        this.calendar.setOption('weekends',true);
+      }
+    }
+
     this.calendarView = value;
     this.calendar.changeView(value);
   }
@@ -178,12 +186,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   private _initConfig(config: CalendarConfig): void {
     this.config = {
       ...config,
+      initialView: config.initialView || CalendarView.Week,
+      weekends: config.weekends ?? true,
       views: config.views || [
         CalendarView.Day,
         CalendarView.Week,
         CalendarView.Month,
       ],
-      defaultView: CalendarView.Week,
+      defaultView: this.config.initialView,
     };
 
     this.calendarView = this.config.defaultView;
@@ -293,7 +303,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       contentHeight: 'auto',
       allDaySlot: false,
       firstDay: 0,
-      initialView: 'timeGridWeek',
+      initialView: this.config.initialView,
+      initialDate: this.config.initialDate,
       stickyHeaderDates: true,
       nowIndicator: true,
       weekends: this.showWeekends,
@@ -414,6 +425,11 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
     this.calendar.render();
 
     setTimeout(() => {
+      
+
+      if(this.config.initialDate) {
+        this.calendar.gotoDate(this.config.initialDate);  
+      }
       if (this.config.initialized) {
         this.config.initialized();
       }
