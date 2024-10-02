@@ -57,7 +57,7 @@
     "@firestitch/drawer": "^14.0.0",
     "@firestitch/example": "^14.0.0",
     "@firestitch/file": "^14.0.0",
-    "@firestitch/filter": "^14.0.1",
+    "@firestitch/filter": "^14.0.2",
     "@firestitch/iframe": "^14.0.0",
     "@firestitch/label": "^14.0.0",
     "@firestitch/lint": "^14.0.11",
