@@ -1,0 +1,28 @@
+{
+  "name": "@firestitch/calendar",
+  "version": "13.1.11",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Firestitch/ngx-calendar"
+  },
+  "author": {
+    "name": "Firestitch",
+    "email": "admin@firestitch.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@fullcalendar/core": "^6.1.10",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/resource-timeline": "^6.1.10",
+    "@fullcalendar/timegrid": "^6.1.10"
+  },
+  "sideEffects": false,
+  "esm2020": "esm2020/firestitch-calendar.mjs",
+  "fesm2015": "fesm2015/firestitch-calendar.mjs",
+  "fesm2020": "fesm2020/firestitch-calendar.mjs",
+  "typings": "firestitch-calendar.d.ts"
+}
