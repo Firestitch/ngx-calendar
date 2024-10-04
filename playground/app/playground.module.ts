@@ -37,7 +37,7 @@ const routes: Routes = [
       queryParam: true,
       chips: true,
     }),
-    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes, {}),
     FsExampleModule.forRoot(),
     FsMessageModule.forRoot(),
   ],
