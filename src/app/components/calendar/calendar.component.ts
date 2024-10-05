@@ -106,7 +106,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   public calendarNext(): void {
-    this.calendar.next();
+    this.calendar.next(null);
   }
 
   public calendarViewChange(value: CalendarView): void {
@@ -133,7 +133,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   public ngOnDestroy(): void {
-    this._destroy$.next();
+    this._destroy$.next(null);
     this._destroy$.complete();
   }
 
