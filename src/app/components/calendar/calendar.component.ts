@@ -106,7 +106,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   public calendarNext(): void {
-    this.calendar.next(null);
+    this.calendar.next();
   }
 
   public calendarViewChange(value: CalendarView): void {
