@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FsCalendarModule } from '@firestitch/calendar';
 import { FsExampleModule } from '@firestitch/example';
-import { FsFilterModule } from '@firestitch/filter';
+import { ButtonStyle, FsFilterModule } from '@firestitch/filter';
 import { FsMessageModule } from '@firestitch/message';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +36,7 @@ const routes: Routes = [
       case: 'camel',
       queryParam: true,
       chips: true,
+      buttonStyle: ButtonStyle.Flat,
     }),
     RouterModule.forRoot(routes, {}),
     FsExampleModule.forRoot(),

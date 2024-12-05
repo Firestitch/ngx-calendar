@@ -18,7 +18,7 @@ import {
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 
-import { ActionMode, ActionType, FilterComponent, FilterConfig } from '@firestitch/filter';
+import { ActionMode, FilterComponent, FilterConfig } from '@firestitch/filter';
 import { FsMenuComponent } from '@firestitch/menu';
 
 import { fromEvent, Subject } from 'rxjs';
@@ -242,7 +242,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         actions.push({
           mode: ActionMode.SelectButton,
           label: 'View',
-          type: ActionType.Stroked,
           primary: false,
           default: this.calendarView,
           change: (value) => {
@@ -314,7 +313,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
           displayEventEnd: true,
         },
       },
-      eventClassNames: (arg) => {
+      eventClassNames: () => {
         return [];
       },
       eventDrop: () => {
