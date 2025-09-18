@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+
 import { FsCalendarModule } from '@firestitch/calendar';
 import { FsExampleModule } from '@firestitch/example';
 import { ButtonStyle, FsFilterModule } from '@firestitch/filter';
@@ -46,6 +48,14 @@ const routes: Routes = [
     AppComponent,
     ExamplesComponent,
     ExampleComponent,
+  ],
+  providers: [
+    { 
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        appearance: 'outline',
+      },
+    },
   ],
 })
 export class PlaygroundModule {

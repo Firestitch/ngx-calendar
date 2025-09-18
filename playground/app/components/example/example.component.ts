@@ -45,7 +45,9 @@ export class ExampleComponent implements OnInit {
       initialDate: new Date(),
       weekScrollToTime: '08:00:00',
       weekends: false,
-      eventsFetch: (data: EventSourceFuncArg) => {
+      eventsFetch: (data: EventSourceFuncArg, query) => {
+        console.log('eventsFetch', data, query);
+
         const events: CalendarEvent[] = [
           {
             id: '1',
@@ -78,10 +80,29 @@ export class ExampleComponent implements OnInit {
       },
       filterConfig: {
         items: [
+          // {
+          //   type: ItemType.Keyword,
+          //   label: 'Search',
+          //   name: 'search',
+          // },
           {
-            type: ItemType.Text,
-            label: 'Search',
-            name: 'search',
+            type: ItemType.Select,
+            label: 'Age',
+            name: 'age',
+            values: [
+              {
+                name: '10',
+                value: '10',
+              },
+              {
+                name: '20',
+                value: '20',
+              },
+              {
+                name: '30',
+                value: '30',
+              },
+            ],
           },
         ],
       },

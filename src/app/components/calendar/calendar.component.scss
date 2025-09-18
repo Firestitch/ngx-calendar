@@ -75,6 +75,12 @@
 
 fs-filter {
   margin: 0;
+
+  ::ng-deep {
+    fs-filter-chips {
+      order: -1;
+    }
+  }
 }
 
 

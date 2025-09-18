@@ -227,7 +227,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   private _initFilterConfig(): void {
     if (this.config.filterConfig) {
-
       const actions = [];
       const values = [
         { name: 'Day', value: CalendarView.Day },
@@ -371,7 +370,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
       },
       events: (info) => {
         if (this.config.eventsFetch) {
-          const query = this.filter?.filterParamsQuery || {};
+          const query = this.filter?.query || {};
 
           return this.config.eventsFetch(info, query)
             .pipe(
