@@ -19,7 +19,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 
 import { ActionMode, FilterComponent, FilterConfig } from '@firestitch/filter';
-import { FsMenuComponent } from '@firestitch/menu';
+import { FsMenuComponent, FsMenuModule } from '@firestitch/menu';
 
 import { fromEvent, Subject } from 'rxjs';
 import { map, takeUntil, throttleTime } from 'rxjs/operators';
@@ -38,13 +38,26 @@ import { CalendarEventDirective, CalendarToolbarLeftDirective } from '../../dire
 import { CalendarView } from '../../enums';
 import { CalendarConfig, CalendarEvent, ToolbarMenuItem } from '../../interfaces';
 import { CalendarEventComponent } from '../calendar-event';
+import { MatAnchor, MatIconAnchor } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { NgTemplateOutlet, NgClass } from '@angular/common';
 
 
 @Component({
-  selector: 'fs-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-calendar',
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MatAnchor,
+        MatIconAnchor,
+        MatIcon,
+        NgTemplateOutlet,
+        FilterComponent,
+        FsMenuModule,
+        NgClass,
+    ],
 })
 export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
 

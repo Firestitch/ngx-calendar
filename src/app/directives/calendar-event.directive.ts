@@ -5,7 +5,8 @@ import { EventImpl } from '@fullcalendar/core/internal';
 
 
 @Directive({
-  selector: '[fsCalendarEvent]',
+    selector: '[fsCalendarEvent]',
+    standalone: true,
 })
 export class CalendarEventDirective {
 

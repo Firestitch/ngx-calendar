@@ -7,13 +7,24 @@ import { of } from 'rxjs';
 
 import { EventSourceFuncArg } from '@fullcalendar/core';
 import { addDays, addHours } from 'date-fns';
+import { CalendarComponent as CalendarComponent_1 } from '../../../../src/app/components/calendar/calendar.component';
+import { CalendarEventDirective } from '../../../../src/app/directives/calendar-event.directive';
+import { CalendarToolbarLeftDirective } from '../../../../src/app/directives/calendar-toolbar-left.directive';
+import { NgTemplateOutlet } from '@angular/common';
 
 
 @Component({
-  selector: 'app-example',
-  templateUrl: './example.component.html',
-  styleUrls: ['./example.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-example',
+    templateUrl: './example.component.html',
+    styleUrls: ['./example.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        CalendarComponent_1,
+        CalendarEventDirective,
+        CalendarToolbarLeftDirective,
+        NgTemplateOutlet,
+    ],
 })
 export class ExampleComponent implements OnInit {
 

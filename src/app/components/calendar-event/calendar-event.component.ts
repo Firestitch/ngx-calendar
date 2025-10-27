@@ -10,13 +10,16 @@ import { Subject } from 'rxjs';
 import { EventContentArg } from '@fullcalendar/core';
 
 import { CalendarEventDirective } from '../../directives';
+import { NgTemplateOutlet } from '@angular/common';
 
 
 @Component({
-  selector: 'app-calendar-event',
-  templateUrl: './calendar-event.component.html',
-  styleUrls: ['./calendar-event.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-calendar-event',
+    templateUrl: './calendar-event.component.html',
+    styleUrls: ['./calendar-event.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgTemplateOutlet],
 })
 export class CalendarEventComponent implements OnDestroy {
 
