@@ -1,5 +1,5 @@
-<ng-container *ngIf="eventTemplate; else default">
-  <ng-container 
+@if (eventTemplate) {
+  <ng-container
     [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{ 
       event: eventContentArg.event, 
       data: eventContentArg.event.extendedProps, 
@@ -20,10 +20,9 @@
       isDragging: eventContentArg.isDragging,
       isResizing: eventContentArg.isResizing
     }">
-    </ng-container>
-</ng-container>
-
-<ng-template #default>
+  </ng-container>
+} @else {
   {{eventContentArg.timeText}}
-</ng-template>
+}
+
 

@@ -1,10 +1,10 @@
 <div class="toolbar">
   <div class="left">
     <ng-template #todayTemplate>
-      <a  
-          mat-stroked-button
-          class="today"
-          (click)="today()">
+      <a
+        mat-stroked-button
+        class="today"
+        (click)="today()">
         Today
       </a>
     </ng-template>
@@ -14,47 +14,47 @@
         <a mat-icon-button (click)="calendarNext()"><mat-icon>chevron_right</mat-icon></a>
       </span>
     </ng-template>
-    
+
     <ng-template #titleTemplate>
       <div class="title">{{title}}</div>
     </ng-template>
 
-    <ng-container *ngIf="toolbarLeftTemplate">
-      <ng-container 
-        [ngTemplateOutlet]="toolbarLeftTemplate" 
+    @if (toolbarLeftTemplate) {
+      <ng-container
+        [ngTemplateOutlet]="toolbarLeftTemplate"
         [ngTemplateOutletContext]="{ todayTemplate, titleTemplate, navTemplate }">
-      </ng-container>    
-    </ng-container>
-    
-    <ng-container *ngIf="!toolbarLeftTemplate">
+      </ng-container>
+    }
+
+    @if (!toolbarLeftTemplate) {
       <ng-container [ngTemplateOutlet]="todayTemplate"></ng-container>
       <ng-container [ngTemplateOutlet]="navTemplate"></ng-container>
       <ng-container [ngTemplateOutlet]="titleTemplate"></ng-container>
-    </ng-container>
+    }
 
   </div>
 
   <div class="right">
-    <ng-container *ngIf="filterConfig">
-      <fs-filter      
+    @if (filterConfig) {
+      <fs-filter
         (closed)="filterClosed()"
         (closed)="filterOpened()"
         [config]="filterConfig">
       </fs-filter>
-    </ng-container>
-    
-    <ng-container *ngIf="toolbarMenuItems.length">
+    }
+
+    @if (toolbarMenuItems.length) {
       <fs-menu>
-        <ng-container *ngFor="let toolbarMenuItem of toolbarMenuItems">
+        @for (toolbarMenuItem of toolbarMenuItems; track toolbarMenuItem) {
           <ng-template
-              fs-menu-item
-              [show]="toolbarMenuItem.show"
-              (click)="toolbarMenuItemClick(toolbarMenuItem)">
+            fs-menu-item
+            [show]="toolbarMenuItem.show"
+            (click)="toolbarMenuItemClick(toolbarMenuItem)">
             {{toolbarMenuItem.label}}
           </ng-template>
-        </ng-container>
+        }
       </fs-menu>
-    </ng-container>
+    }
   </div>
 
 </div>
