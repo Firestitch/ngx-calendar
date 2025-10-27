@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2, inject } from '@angular/core';
 import {
   ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, NavigationStart, Router,
 } from '@angular/router';
@@ -8,15 +8,17 @@ import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class BodyClassRenderer {
+  private _router = inject(Router);
+  private _rendererFactory = inject(RendererFactory2);
+  private _route = inject(ActivatedRoute);
+
 
   private _bodyClassListener;
   private _renderer: Renderer2;
 
-  constructor(
-    private _router: Router,
-    private _rendererFactory: RendererFactory2,
-    private _route: ActivatedRoute,
-  ) {
+  constructor() {
+    const _rendererFactory = this._rendererFactory;
+
     this._renderer = _rendererFactory.createRenderer(null, null);
   }
 

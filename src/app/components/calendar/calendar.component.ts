@@ -1,19 +1,4 @@
-import {
-  AfterContentInit,
-  ApplicationRef,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ComponentFactoryResolver,
-  ContentChild,
-  ElementRef,
-  Injector,
-  Input,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { AfterContentInit, ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ContentChild, ElementRef, Injector, Input, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
@@ -60,6 +45,13 @@ import { NgTemplateOutlet, NgClass } from '@angular/common';
     ],
 })
 export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
+  private _componentFactoryResolver = inject(ComponentFactoryResolver);
+  private _appRef = inject(ApplicationRef);
+  private _injector = inject(Injector);
+  private _cdRef = inject(ChangeDetectorRef);
+  private _el = inject(ElementRef);
+  private _breakpointObserver = inject(BreakpointObserver);
+
 
   @ContentChild(CalendarEventDirective, { read: TemplateRef })
   public eventTemplate: TemplateRef<CalendarEventDirective>;
@@ -87,15 +79,6 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public filterConfig: FilterConfig;
 
   private _destroy$ = new Subject();
-
-  constructor(
-    private _componentFactoryResolver: ComponentFactoryResolver,
-    private _appRef: ApplicationRef,
-    private _injector: Injector,
-    private _cdRef: ChangeDetectorRef,
-    private _el: ElementRef,
-    private _breakpointObserver: BreakpointObserver,
-  ) { }
 
   public ngAfterContentInit(): void {
     setTimeout(() => {

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject, OnDestroy,
-  TemplateRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, TemplateRef, inject } from '@angular/core';
 
 import { Subject } from 'rxjs';
 
@@ -22,13 +17,11 @@ import { NgTemplateOutlet } from '@angular/common';
     imports: [NgTemplateOutlet],
 })
 export class CalendarEventComponent implements OnDestroy {
+  eventContentArg = inject<EventContentArg>('eventContentArg' as any);
+  eventTemplate = inject<TemplateRef<CalendarEventDirective>>('eventTemplate' as any);
+
 
   private _destroy$ = new Subject();
-
-  constructor(
-    @Inject('eventContentArg') public eventContentArg: EventContentArg,
-    @Inject('eventTemplate') public eventTemplate: TemplateRef<CalendarEventDirective>,
-  ) {}
 
   public ngOnDestroy(): void {
     this._destroy$.next(null);

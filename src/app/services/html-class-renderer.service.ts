@@ -1,16 +1,18 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2, inject } from '@angular/core';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class HtmlClassRenderer {
+  private _rendererFactory = inject(RendererFactory2);
+
 
   private _renderer: Renderer2;
 
-  constructor(
-    private _rendererFactory: RendererFactory2,
-  ) {
+  constructor() {
+    const _rendererFactory = this._rendererFactory;
+
     this._renderer = _rendererFactory.createRenderer(null, null);
   }
 
