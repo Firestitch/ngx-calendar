@@ -75,10 +75,25 @@
 
 fs-filter {
   margin: 0;
+  width: 100%;
 
   ::ng-deep {
     fs-filter-chips {
       order: -1;
+    }
+
+    .filter-bar-container {
+      align-items: center !important;
+      column-gap: 10px;
+
+      .filter-actions {
+        flex: 0 0 auto;
+      }
+      
+      .filter-stack {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 }
@@ -109,7 +124,12 @@ fs-filter {
     align-items: center;
 
     .prev-next {
+      display: flex;
       margin: 0 8px;
+
+      a {
+        display: flex;
+      }
     }
   }
 

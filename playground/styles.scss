@@ -1,5 +1,22 @@
-@import '@firestitch/component-tools/assets/playground.scss';
-@import '@firestitch/message/styles';
-@import 'node_modules/@firestitch/selectbutton/styles';
-@import 'node_modules/@firestitch/filter/styles';
-@import 'node_modules/@firestitch/chip/styles';
+
+
+@use '@angular/material' as mat;
+@use '@firestitch/component-tools/assets/playground.scss';
+@use '@firestitch/style/variables' with (
+  $palette: playground.$primary-palette
+);
+@use '@firestitch/style/styles' as fs-style;
+@use '@firestitch/message/styles' as fs-message;
+@import '@firestitch/filter/styles';
+@import '@firestitch/datepicker/styles';
+@import '@firestitch/chip/styles';
+@import '@firestitch/style/styles';
+@import '@firestitch/skeleton/styles';
+@import '@firestitch/form/styles';
+@import '@firestitch/file/styles';
+@import '@firestitch/selectbutton/styles';
+
+@include fs-style.core();
+@include fs-file(playground.$primary-palette);
+@include fs-filter(playground.$primary-palette);
+
