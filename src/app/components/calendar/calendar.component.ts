@@ -1,8 +1,7 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ContentChild, ElementRef, Injector, Input, OnDestroy, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { AfterContentInit, ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, ContentChild, ElementRef, Injector, Input, OnDestroy, OnInit, TemplateRef, ViewChild, createComponent, inject } from '@angular/core';
 
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { MatAnchor, MatIconAnchor } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
@@ -72,7 +71,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public filterConfig: FilterConfig;
 
   private _destroy$ = new Subject();
-  private _componentFactoryResolver = inject(ComponentFactoryResolver);
+  private _eventComponentRefs = new Set<ComponentRef<CalendarEventComponent>>();
   private _appRef = inject(ApplicationRef);
   private _injector = inject(Injector);
   private _cdRef = inject(ChangeDetectorRef);
@@ -130,6 +129,8 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
   public ngOnDestroy(): void {
     this._destroy$.next(null);
     this._destroy$.complete();
+    this._eventComponentRefs.forEach((ref) => ref.destroy());
+    this._eventComponentRefs.clear();
   }
 
   public filterClosed(): void {
@@ -338,7 +339,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
         const el = document.createElement('div');
         el.classList.add('calendar-event');
 
-        const injector = Injector.create({
+        const elementInjector = Injector.create({
           parent: this._injector,
           providers: [
             {
@@ -352,14 +353,14 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterContentInit {
           ],
         });
 
-        const componentPortal = new ComponentPortal(CalendarEventComponent, null, injector);
+        const componentRef = createComponent(CalendarEventComponent, {
+          hostElement: el,
+          environmentInjector: this._appRef.injector,
+          elementInjector,
+        });
 
-        new DomPortalOutlet(
-          el,
-          this._componentFactoryResolver,
-          this._appRef,
-          this._injector,
-        ).attach(componentPortal);
+        this._appRef.attachView(componentRef.hostView);
+        this._eventComponentRefs.add(componentRef);
 
         return { domNodes: [el] };
       },
